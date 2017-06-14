@@ -8,11 +8,14 @@ import javax.swing.JTextField;
 
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 
-public class login {
+public class login implements ActionListener{					//µn¤J¤¶­±
 
 	private JFrame f = new JFrame();
 	JTextField account = new JTextField();
@@ -22,7 +25,7 @@ public class login {
 		this.graphics();
 	}
 	
-	public void graphics(){
+	public void graphics() {
 		
 		f.setTitle("µn¤J");
 		f.setSize(500,180);
@@ -88,6 +91,84 @@ public class login {
 		JButton forget_account = new JButton("§Ñ°O±K½X");
 		forget_account.setBounds(250,0,250,50);
 		else_function.add(forget_account);
+		
+		/*-------------------buttonÄ²µo---------------------------------*/
+		get_in_system.setActionCommand("µn¤J");
+		get_in_system.addActionListener(this);
+		
+		new_account.setActionCommand("µù¥U");
+		new_account.addActionListener(this);
+		
+		forget_account.setActionCommand("§Ñ°O±K½X");
+		forget_account.addActionListener(this);
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+		String compare_a = account.getText();
+		String compare_b = password.getText();
+		String compare_c = null;
+		
+
+		if(e.getActionCommand().equals("µn¤J")){
+			
+			
+			//System.out.println(compare_a+"  "+compare_b);
+			
+			compare com = new compare();
+			try {
+				com.compare_item(compare_a,compare_b,compare_c);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			if(com.last_compare==true){
+				yes right_compare = new yes();
+			}
+			
+			else if(com.last_compare==false){
+				no error_compare = new no();
+			}
+			
+		}
+		
+		if(e.getActionCommand().equals("µù¥U")){
+			
+			registered c = new registered();
+		}
+		
+		if(e.getActionCommand().equals("§Ñ°O±K½X")){
+			
+			
+			compare com_email = new compare();
+	
+			try {
+				com_email.compare_item(compare_a,compare_b,compare_c);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			if(com_email.last_x==true){
+				
+				compare_c = com_email.email_address;
+				compare_b = com_email.email_password;
+				
+				//System.out.println(com_email.email_address);
+						
+				send_email s = new send_email(compare_c, compare_a,compare_b);
+				
+				yes send_it = new yes();
+				
+				compare_c = null;
+			}
+				
+		}
+		
 		
 	}
 }

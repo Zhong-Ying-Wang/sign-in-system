@@ -3,13 +3,15 @@ package sign_in_system;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class windows {
+public class windows implements ActionListener{			//初始介面
 	
 	private JFrame w = new JFrame();
 
@@ -84,5 +86,29 @@ public class windows {
 //		else_blank.setBackground(Color.BLUE);
 //		
 //		else_function.add(else_blank);
+		
+		/*--------------------button觸發---------------------------------*/
+		
+		function_one.setActionCommand("註冊");
+		function_one.addActionListener(this);
+		
+		function_two.setActionCommand("登入");
+		function_two.addActionListener(this);
+		
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+		if(e.getActionCommand().equals("登入")){
+			login a = new login();
+		}
+		
+		if(e.getActionCommand().equals("註冊")){
+			registered b = new registered();
+		}
+		
 	}
 }
